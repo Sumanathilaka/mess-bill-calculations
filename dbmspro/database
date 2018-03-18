@@ -1,0 +1,95 @@
+create database dbms;
+
+use dbms;
+
+
+create table messmanagerlogin
+(
+username varchar(50) not null,
+password varchar(50) not null,
+primary key (username,password)
+);
+
+create table messoperatorlogin
+(
+username varchar(50) not null,
+password varchar(50) not null,
+primary key (username,password)
+);
+
+insert into messmanagerlogin values("deshan","123");
+
+insert into messoperatorlogin values("deshan","123");
+
+
+
+create table diner(
+rollno varchar(50) primary key not null,
+fullname varchar(50) not null,
+department varchar(50) not null,
+address varchar(100),
+telephone varchar(13),
+email varchar(30),
+month int(10),
+year int(10),
+username varchar(30),
+password varchar(30)
+);
+
+
+create table messleave(
+    rollno varchar(40),
+	fromdate date,
+	todate date,
+	noofdays int(10),
+	primary key(rollno,fromdate),
+	foreign key(rollno) references diner(rollno) on delete cascade
+);
+
+create table purchase(
+    year int(5),
+    month int(5),
+    rollno varchar(40),
+	date date,
+	item varchar(50),
+	quantity int(45),
+    cost int(70),
+	primary key(rollno,date,item),
+	foreign key(rollno) references diner(rollno) on delete cascade
+);
+
+ create table guest(
+    year int(5),
+    month int(5),
+    rollno varchar(40),
+	date date,
+	Guestno int(60),
+	portion varchar(50),
+	cost int(50),
+    primary key(rollno,date),
+    foreign key(rollno) references diner(rollno) on delete cascade
+);
+
+create table dailyorder(
+orderid int(16) auto_increment primary key, 
+item varchar(50),
+quantity int(100),
+requestdate date,
+releaseddate date,
+approval varchar(10)
+
+);
+
+create table ordertomess(
+orderid int(16) auto_increment primary key, 
+item varchar(50),
+year varchar(10),
+month int (5),
+quantity int(100),
+cost int(60),
+supplier text(60),
+requestdate date,
+releaseddate date,
+approval varchar(10)
+
+);
